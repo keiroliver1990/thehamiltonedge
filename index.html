@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hamilton Edge</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Josefin+Sans:wght@100;200;300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Josefin Sans', sans-serif;
+    position: relative;
+    background: #000;
+  }
+
+  /* ── VIDEO BACKGROUND ── */
+  .video-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .video-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* ── DARK OVERLAY ── */
+  .video-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.52);
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 24px;
+    gap: 0;
+  }
+
+  /* ── THE ── */
+  .the-word {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: clamp(10px, 1.1vw, 13px);
+    letter-spacing: 0.75em;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+    margin-bottom: 2px;
+  }
+
+  /* ── MAIN TITLE ── */
+  .title-wrap {
+    opacity: 0;
+    animation: fadeUp 1.1s ease 0.6s forwards;
+    line-height: 0.92;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  /* HAMILTON — elegant high-contrast serif */
+  .title-hamilton {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(68px, 12vw, 150px);
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-shadow:
+      0 0 100px rgba(255,255,255,0.1),
+      2px 3px 0px rgba(0,0,0,0.5);
+  }
+
+  /* GROUP — Bodoni Moda high-contrast serif */
+  .title-group {
+    display: block;
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(26px, 4.5vw, 56px);
+    color: rgba(255,255,255,0.82);
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-top: -4px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 0;
+    height: 0.5px;
+    background: rgba(255,255,255,0.35);
+    margin: 20px auto 22px;
+    animation: growLine 1s ease 1.1s forwards;
+  }
+
+  @keyframes growLine {
+    to { width: 200px; }
+  }
+
+  /* ── PILLS ── */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+    max-width: 680px;
+  }
+
+  .pill {
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    font-size: clamp(9px, 1vw, 11px);
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    cursor: default;
+    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.05);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .pill:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.8);
+    color: #fff;
+  }
+
+  /* ── CTA ── */
+  .cta-wrap {
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: #fff;
+    color: #0a0a0a;
+    border: none;
+    padding: 14px 52px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(10px, 1vw, 12px);
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+    border-radius: 2px;
+  }
+
+  .cta-btn:hover {
+    background: #0a0a0a;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MOBILE RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .content {
+      padding: 0 20px;
+    }
+
+    .the-word {
+      font-size: 10px;
+      letter-spacing: 0.5em;
+    }
+
+    .title-hamilton {
+      font-size: clamp(52px, 18vw, 80px);
+    }
+
+    .title-group {
+      font-size: clamp(20px, 7vw, 32px);
+      letter-spacing: 0.3em;
+    }
+
+    .pills {
+      max-width: 100%;
+      gap: 8px;
+    }
+
+    .pill {
+      font-size: 9px;
+      padding: 7px 14px;
+      letter-spacing: 0.12em;
+      white-space: normal;
+      text-align: center;
+    }
+
+    .cta-btn {
+      padding: 14px 36px;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+    }
+
+    .cta-wrap {
+      margin-top: 28px;
+    }
+
+    .divider {
+      margin: 14px auto 16px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- VIDEO BACKGROUND -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="kling_20260509_VIDEO_instead_of_772_0.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+    <span class="the-word">The</span>
+
+    <div class="title-wrap">
+      <span class="title-hamilton">Hamilton</span>
+      <span class="title-group">Edge</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="pills">
+      <span class="pill">CRM</span>
+      <span class="pill">Brand Development</span>
+      <span class="pill">Photo / Video</span>
+      <span class="pill">Business Strategy</span>
+      <span class="pill">Web Development</span>
+      <span class="pill">Social Media Management</span>
+      <span class="pill">BIM</span>
+    </div>
+
+    <div class="cta-wrap">
+      <button class="cta-btn">Contact Us</button>
+    </div>
+  </div>
+
+</body>
+</html>
