@@ -302,7 +302,7 @@
 
   .service-item {
     padding: 52px 0;
-    border-top: 1px solid rgba(255,255,255,0.07);
+    border-top: none;
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 0.8s ease, transform 0.8s ease;
@@ -310,6 +310,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+  }
+
+  .service-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.15) 80%, transparent);
   }
 
   .service-item.visible {
@@ -317,8 +328,14 @@
     transform: translateY(0);
   }
 
-  .service-item:last-child {
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+  .service-item:last-child::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.15) 80%, transparent);
   }
 
   .service-number {
@@ -504,7 +521,7 @@
   .form-section-label {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 100;
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0.6em;
     color: rgba(255,255,255,0.2);
     text-transform: uppercase;
@@ -539,7 +556,7 @@
     display: block;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 200;
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: 0.25em;
     color: rgba(255,255,255,0.4);
     text-transform: uppercase;
@@ -549,7 +566,7 @@
   .form-group .hint {
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
-    font-size: 11px;
+    font-size: 13px;
     color: rgba(255,255,255,0.2);
     font-style: italic;
     letter-spacing: 0.03em;
@@ -566,10 +583,10 @@
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.09);
     border-radius: 1px;
-    padding: 12px 14px;
+    padding: 13px 14px;
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 15px;
     color: #e8e2d6;
     letter-spacing: 0.04em;
     outline: none;
@@ -598,7 +615,7 @@
   .check-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0;
     cursor: pointer;
   }
 
@@ -615,6 +632,7 @@
     appearance: none;
     position: relative;
     transition: background 0.2s ease;
+    margin-right: 0;
   }
 
   .check-item input[type="radio"] { border-radius: 50%; }
@@ -637,9 +655,10 @@
   .check-item span {
     font-family: 'Raleway', sans-serif;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 15px;
     color: rgba(255,255,255,0.5);
     letter-spacing: 0.03em;
+    margin-left: 14px;
   }
 
   .form-divider {
@@ -783,7 +802,7 @@
 
   <!-- SERVICES -->
   <section id="services">
-    <p class="services-heading">What We Do</p>
+    <p class="services-heading" style="display:none">What We Do</p>
 
     <div class="service-item" id="business-strategy">
       <p class="service-number">01</p>
