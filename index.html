@@ -856,7 +856,6 @@
       <!-- FORM -->
       <div id="intake-form-wrap">
         <div class="modal-header">
-          <span class="modal-the">The</span>
           <h2 class="modal-title">Begin the Conversation</h2>
           <p class="modal-sub">Client Intake — The Hamilton Edge</p>
           <p class="modal-intro">Tell us about your business and goals. This helps us show up prepared and give you the most valuable experience from day one.</p>
@@ -965,7 +964,8 @@
               <label>Monthly budget</label>
               <select name="budget">
                 <option value="" disabled selected>Select one</option>
-                <option>Under $1,000/month</option>
+                <option>$500 and under</option>
+                <option>$500 – $1,000/month</option>
                 <option>$1,000 – $2,500/month</option>
                 <option>$2,500 – $5,000/month</option>
                 <option>$5,000 – $10,000/month</option>
@@ -1022,6 +1022,12 @@
     function closeModal() {
       document.getElementById('intake-modal').classList.remove('open');
       document.body.style.overflow = '';
+      // Reset form and thank you state after modal closes
+      setTimeout(() => {
+        document.getElementById('intake-form').reset();
+        document.getElementById('intake-form-wrap').style.display = 'block';
+        document.getElementById('thank-you').classList.remove('visible');
+      }, 500);
     }
 
     // Close on Escape key
