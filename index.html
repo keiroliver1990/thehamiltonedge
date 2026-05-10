@@ -208,6 +208,20 @@
     transform: translateY(-2px);
   }
 
+  /* ── TAGLINE TEXT ── */
+  .tagline-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(13px, 1.8vw, 20px);
+    letter-spacing: 0.28em;
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1s forwards;
+  }
+
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -283,6 +297,8 @@
 
     <div class="divider"></div>
 
+    <p class="tagline-text">Strategy Meets Edge</p>
+
     <div class="pills">
       <span class="pill">CRM</span>
       <span class="pill">Brand Development</span>
@@ -294,86 +310,29 @@
     </div>
 
     <div class="cta-wrap">
-      <a href="mailto:hello@thehamiltonedge.com?subject=Inquiry%20-%20The%20Hamilton%20Edge" class="cta-btn" onclick="handleContact(event)">Contact Us</a>
-
-  <!-- Email Modal -->
-  <div id="email-modal" style="
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.75);
-    z-index:100;
-    align-items:center;
-    justify-content:center;
+      <a href="mailto:hello@thehamiltonedge.com?subject=Inquiry%20-%20The%20Hamilton%20Edge" class="cta-btn">Contact Us</a>
+    </div>
+  </div>
+  <footer style="
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
   ">
-    <div style="
-      background:#1a1714;
-      border:1px solid #3a3530;
-      padding:40px 50px;
-      text-align:center;
-      max-width:420px;
-      width:90%;
-    ">
-      <p style="
-        font-family:'Josefin Sans',sans-serif;
-        font-weight:100;
-        font-size:10px;
-        letter-spacing:0.4em;
-        color:#888;
-        text-transform:uppercase;
-        margin-bottom:16px;
-      ">Get in touch</p>
-      <p style="
-        font-family:'Playfair Display',serif;
-        font-style:italic;
-        font-size:22px;
-        color:#f0ebe0;
-        margin-bottom:8px;
-      ">hello@thehamiltonedge.com</p>
-      <p style="
-        font-family:'Josefin Sans',sans-serif;
-        font-weight:100;
-        font-size:9px;
-        letter-spacing:0.3em;
-        color:#666;
-        text-transform:uppercase;
-        margin-bottom:28px;
-      ">We'll get back to you within 24 hours</p>
-      <button onclick="document.getElementById('email-modal').style.display='none'" style="
-        background:transparent;
-        border:1px solid #3a3530;
-        color:#888;
-        font-family:'Josefin Sans',sans-serif;
-        font-weight:200;
-        font-size:9px;
-        letter-spacing:0.4em;
-        text-transform:uppercase;
-        padding:10px 28px;
-        cursor:pointer;
-      ">Close</button>
-    </div>
-  </div>
-    </div>
-  </div>
+    &copy; 2026 The Hamilton Edge &nbsp;&middot;&nbsp; hello@thehamiltonedge.com
+  </footer>
+
   <p class="tagline" style="display:none"></p>
 
   <script>
-    // Handle Contact CTA with fallback modal
-    function handleContact(e) {
-      const modal = document.getElementById('email-modal');
-      // Try mailto first, show modal as fallback after short delay
-      setTimeout(() => {
-        if (document.hasFocus()) {
-          modal.style.display = 'flex';
-        }
-      }, 500);
-    }
-
-    // Close modal on background click
-    document.getElementById('email-modal').addEventListener('click', function(e) {
-      if (e.target === this) this.style.display = 'none';
-    });
-
     // Force video play on Safari
     const video = document.querySelector('video');
     if (video) {
