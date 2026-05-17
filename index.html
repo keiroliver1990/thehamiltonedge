@@ -958,13 +958,13 @@
       <p class="tagline-text">Strategy Meets Edge</p>
 
       <div class="pills">
-        <a class="pill" href="#business-strategy">Business Strategy</a>
-        <a class="pill" href="#brand-development">Brand Development</a>
-        <a class="pill" href="#website-development">Website Development</a>
-        <a class="pill" href="#social-media">Social Media Management</a>
-        <a class="pill" href="#content-production">Photo / Video</a>
-        <a class="pill" href="#crm">CRM & Client Experience</a>
-        <a class="pill" href="#experiences">Experiences</a>
+        <a class="pill" href="#" data-target="business-strategy">Business Strategy</a>
+        <a class="pill" href="#" data-target="brand-development">Brand Development</a>
+        <a class="pill" href="#" data-target="website-development">Website Development</a>
+        <a class="pill" href="#" data-target="social-media">Social Media Management</a>
+        <a class="pill" href="#" data-target="content-production">Photo / Video</a>
+        <a class="pill" href="#" data-target="crm">CRM & Client Experience</a>
+        <a class="pill" href="#" data-target="experiences">Experiences</a>
       </div>
 
       <div class="cta-wrap">
@@ -1210,6 +1210,17 @@
   </div>
 
   <script>
+    // Pill smooth scroll — no URL hash change
+    document.querySelectorAll('.pill[data-target]').forEach(pill => {
+      pill.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.getElementById(this.dataset.target);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+
     // Modal
     function openModal() {
       document.getElementById('intake-modal').classList.add('open');
