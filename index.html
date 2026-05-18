@@ -718,6 +718,423 @@
     text-transform: uppercase;
   }
 
+  /* Desktop CTA spacing */
+  @media (min-width: 601px) {
+    .cta-wrap { margin-bottom: 32px; }
+  }
+
+  /* ── CASE STUDY PILL — matches hero pills ── */
+  .case-study-pill {
+    display: inline-block;
+    margin-top: 48px;
+    margin-bottom: 4px;
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    font-size: clamp(9px, 1vw, 11px);
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.05);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .case-study-pill:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.8);
+    color: #fff;
+  }
+
+  /* ── CASE STUDY OVERLAY ── */
+  .cs-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+
+  .cs-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .cs-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  .cs-panel {
+    position: absolute;
+    top: 0; right: 0;
+    width: 100%;
+    max-width: 700px;
+    height: 100%;
+    background: #000000;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cs-panel::-webkit-scrollbar { display: none; }
+  .cs-overlay.open .cs-panel { transform: translateX(0); }
+
+  .cs-panel::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.06) 15%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.06) 85%, transparent 100%);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .cs-panel-grain {
+    position: fixed;
+    top: 0; right: 0;
+    width: 700px;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+  }
+
+  /* ── CASE STUDY VIDEO HEADER ── */
+  .cs-video-header {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .cs-video-header video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .cs-video-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
+  }
+
+  .cs-video-fade {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 70%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.92) 85%, #000000 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .cs-video-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+  }
+
+  .cs-scroll-content {
+    padding: 40px 56px 100px 64px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── CLOSE BUTTON ── */
+  .cs-close {
+    position: fixed;
+    top: 32px; right: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.2);
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+    padding: 0;
+    z-index: 10;
+  }
+
+  .cs-close::before { content: '✕'; font-size: 11px; letter-spacing: 0; opacity: 0.6; }
+  .cs-close:hover { color: rgba(255,255,255,0.6); letter-spacing: 0.6em; }
+
+  /* ── ANIMATED CONTENT ── */
+  .cs-animate {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .cs-overlay.open .cs-animate { opacity: 1; transform: translateY(0); }
+  .cs-overlay.open .cs-animate:nth-child(1) { transition-delay: 0.35s; }
+  .cs-overlay.open .cs-animate:nth-child(2) { transition-delay: 0.45s; }
+  .cs-overlay.open .cs-animate:nth-child(3) { transition-delay: 0.52s; }
+  .cs-overlay.open .cs-animate:nth-child(4) { transition-delay: 0.58s; }
+  .cs-overlay.open .cs-animate:nth-child(5) { transition-delay: 0.64s; }
+  .cs-overlay.open .cs-animate:nth-child(6) { transition-delay: 0.70s; }
+  .cs-overlay.open .cs-animate:nth-child(7) { transition-delay: 0.76s; }
+  .cs-overlay.open .cs-animate:nth-child(8) { transition-delay: 0.82s; }
+  .cs-overlay.open .cs-animate:nth-child(9) { transition-delay: 0.88s; }
+
+  .cs-eyebrow {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 8px;
+    letter-spacing: 0.7em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .cs-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(32px, 5vw, 52px);
+    color: #ffffff;
+    line-height: 1.05;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 80px rgba(255,255,255,0.08), 2px 3px 0px rgba(0,0,0,0.5);
+  }
+
+  .cs-client {
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(13px, 1.8vw, 17px);
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+
+  .cs-hero-rule {
+    width: 0;
+    height: 0.5px;
+    background: rgba(255,255,255,0.2);
+    margin: 24px 0 32px;
+    transition: width 0.9s ease 0.6s;
+  }
+
+  .cs-overlay.open .cs-hero-rule { width: 120px; }
+
+  .cs-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 48px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 0;
+  }
+
+  .cs-stat {
+    padding: 0 20px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .cs-stat:first-child { padding-left: 0; }
+  .cs-stat:last-child { border-right: none; }
+
+  .cs-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(26px, 3.5vw, 36px);
+    color: #f0ebe0;
+    display: block;
+    margin-bottom: 8px;
+    text-shadow: 0 0 40px rgba(255,255,255,0.08);
+  }
+
+  .cs-stat-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 7px;
+    letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  .cs-section {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .cs-section:last-of-type { border-bottom: none; }
+
+  .cs-section-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 7px;
+    letter-spacing: 0.7em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .cs-section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .cs-section-body {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: clamp(14px, 1.5vw, 16px);
+    color: rgba(255,255,255,0.45);
+    line-height: 2.1;
+    letter-spacing: 0.04em;
+  }
+
+  .cs-quote {
+    margin: 44px 0;
+    padding: 32px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    position: relative;
+  }
+
+  .cs-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+  }
+
+  .cs-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2.2vw, 24px);
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .cs-quote cite {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 8px;
+    letter-spacing: 0.45em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  .cs-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .cs-tag {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0;
+    padding: 6px 14px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 7px;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.28);
+    text-transform: uppercase;
+    transition: border-color 0.3s ease, color 0.3s ease;
+  }
+
+  .cs-tag:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.55); }
+
+  .cs-cta-wrap {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .cs-cta {
+    display: inline-block;
+    background: rgba(40,36,32,0.45);
+    color: #d4cfc8;
+    border: 1px solid #4a4540;
+    padding: 14px 52px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    font-size: clamp(9px, 1vw, 11px);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.2s ease;
+    border-radius: 1px;
+    text-decoration: none;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  .cs-cta:hover {
+    background: rgba(60,54,48,0.75);
+    color: #f0ebe0;
+    border-color: #8a8078;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 600px) {
+    .cs-scroll-content { padding: 40px 28px 80px 32px; }
+    .cs-stats { grid-template-columns: repeat(3, 1fr); }
+    .cs-stat-value { font-size: 22px; }
+    .cs-panel-grain { width: 100%; }
+    .cs-close { right: 20px; top: 24px; }
+  }
+
   /* ── MODAL OVERLAY ── */
   .modal-overlay {
     position: fixed;
@@ -1137,6 +1554,7 @@
       <h2 class="service-title">Business Strategy</h2>
       <div class="service-rule"></div>
       <p class="service-body">We help businesses define their direction, refine their positioning, and create strategic foundations built for sustainable growth. From operational planning to market visibility, we align business goals with real-world execution.</p>
+      <button class="case-study-pill" onclick="openCaseStudy('business-strategy')">Case Study</button>
     </div>
 
     <div class="service-item" id="brand-development">
@@ -1144,6 +1562,7 @@
       <h2 class="service-title">Brand Development</h2>
       <div class="service-rule"></div>
       <p class="service-body">We build brands that feel intentional, elevated, and memorable. Through visual identity, messaging, and creative direction, we help businesses establish a presence that connects with both clients and culture.</p>
+      <button class="case-study-pill" onclick="openCaseStudy('brand-development')">Case Study</button>
     </div>
 
     <div class="service-item" id="website-development">
@@ -1151,6 +1570,7 @@
       <h2 class="service-title">Website Development</h2>
       <div class="service-rule"></div>
       <p class="service-body">We create modern digital experiences designed to represent your brand with clarity, creativity, and purpose. Every website is built to not only elevate your online presence but to support lead generation, audience engagement, and long-term business growth through thoughtful design and user experience.</p>
+      <button class="case-study-pill" onclick="openCaseStudy('website-development')">Case Study</button>
     </div>
 
     <div class="service-item" id="social-media">
@@ -1158,6 +1578,7 @@
       <h2 class="service-title">Social Media Management</h2>
       <div class="service-rule"></div>
       <p class="service-body">We develop content strategies and social campaigns that strengthen brand visibility, audience engagement, and long-term growth. Our approach focuses on consistency, storytelling, and meaningful connection.</p>
+      <button class="case-study-pill" onclick="openCaseStudy('social-media')">Case Study</button>
     </div>
 
     <div class="service-item" id="content-production">
@@ -1165,6 +1586,7 @@
       <h2 class="service-title">Content Production</h2>
       <div class="service-rule"></div>
       <p class="service-body">From photography and video to campaign-focused creative, we produce content designed to elevate how brands are seen both online and in person. Every asset is created with marketing, storytelling, and scalability in mind.</p>
+      <button class="case-study-pill" onclick="openCaseStudy('content-production')">Case Study</button>
     </div>
 
     <div class="service-item" id="crm">
@@ -1172,6 +1594,7 @@
       <h2 class="service-title">Client Experience & CRM</h2>
       <div class="service-rule"></div>
       <p class="service-body">We help businesses create smoother client experiences through organized systems, communication workflows, and customer relationship management strategies that improve retention and operational efficiency.</p>
+      <button class="case-study-pill" onclick="openCaseStudy('crm')">Case Study</button>
     </div>
 
     <div class="service-item" id="experiences">
@@ -1179,6 +1602,7 @@
       <h2 class="service-title">Experiences</h2>
       <div class="service-rule"></div>
       <p class="service-body">We create thoughtful experiences that bring brands to life through events, activations, and curated moments designed to leave lasting impressions. From concept to execution, we focus on experiences that feel seamless, intentional, and aligned with your brand.</p>
+      <button class="case-study-pill" onclick="openCaseStudy('experiences')">Case Study</button>
     </div>
 
   </section>
@@ -1359,7 +1783,221 @@
     </div>
   </div>
 
+  <!-- CASE STUDY PANEL -->
+  <div class="cs-overlay" id="cs-overlay">
+    <div class="cs-backdrop" onclick="closeCaseStudy()"></div>
+    <div class="cs-panel-grain"></div>
+    <div class="cs-panel" id="cs-panel">
+      <button class="cs-close" onclick="closeCaseStudy()">Close</button>
+      <div class="cs-video-header">
+        <video autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture>
+          <source src="cs-hero.mp4" type="video/mp4">
+        </video>
+        <div class="cs-video-fade"></div>
+        <div class="cs-video-grain"></div>
+      </div>
+      <div class="cs-scroll-content" id="cs-content"></div>
+    </div>
+  </div>
+
   <script>
+    // ── CASE STUDY DATA ──
+    const caseStudies = {
+      'business-strategy': {
+        eyebrow: 'Case Study — Business Strategy',
+        title: 'Repositioning for Growth',
+        client: 'Pacific Ventures Group',
+        stats: [
+          { value: '340%', label: 'Revenue Growth' },
+          { value: '18mo', label: 'Timeline' },
+          { value: '$2.4M', label: 'New ARR' }
+        ],
+        challenge: 'Pacific Ventures had strong operations but no coherent market identity. They were winning projects on price alone, leaving significant margin on the table and attracting clients that didn\'t fit their capabilities.',
+        approach: 'We conducted a full business strategy audit — analyzing their pipeline, client mix, competitive positioning, and operational strengths. We defined a new positioning focused on their genuine differentiator: deep industry relationships in the Pacific Rim market that no competitor could replicate.',
+        result: 'Within 18 months of implementing the new strategy, Pacific Ventures grew revenue by 340%, raised their average project value by 62%, and secured three anchor clients in their new target vertical.',
+        quote: 'The Hamilton Edge didn\'t just give us a strategy document. They gave us a new way of seeing our business — and a clear path to where it could go.',
+        quoteAuthor: 'Marcus Chen, CEO — Pacific Ventures Group',
+        tags: ['Business Strategy', 'Market Positioning', 'Revenue Growth', 'B2B']
+      },
+      'brand-development': {
+        eyebrow: 'Case Study — Brand Development',
+        title: 'Building a Brand from the Ground Up',
+        client: 'Forma Wellness Co.',
+        stats: [
+          { value: '12wk', label: 'Brand Build' },
+          { value: '890%', label: 'Instagram Growth' },
+          { value: '$180K', label: 'Year 1 Revenue' }
+        ],
+        challenge: 'Forma launched as a premium pilates and recovery studio in West Hollywood with exceptional instructors and a beautiful space — but zero brand identity. Their temporary signage and Instagram account didn\'t communicate the premium experience they were delivering.',
+        approach: 'We built the Forma brand from scratch — visual identity, typography system, brand voice, messaging framework, and content direction. The positioning: movement as medicine, elevated. Every touchpoint from the app to the towels communicated that philosophy.',
+        result: 'Forma launched with a complete brand system that positioned them immediately as the premium option in their market. Within 12 months they had a waitlist, 890% Instagram growth, and $180K in year one revenue — all without paid advertising.',
+        quote: 'We opened the doors already looking like we\'d been operating for five years. That\'s what The Hamilton Edge delivered.',
+        quoteAuthor: 'Alexis Torre, Founder — Forma Wellness Co.',
+        tags: ['Brand Development', 'Visual Identity', 'Wellness', 'Los Angeles']
+      },
+      'website-development': {
+        eyebrow: 'Case Study — Website Development',
+        title: 'From Template to Conversion Machine',
+        client: 'Harlow Real Estate Group',
+        stats: [
+          { value: '623%', label: 'Lead Increase' },
+          { value: '0.8s', label: 'Load Time' },
+          { value: '11.2%', label: 'Conversion Rate' }
+        ],
+        challenge: 'Harlow\'s previous website was a generic real estate template that looked identical to every other brokerage in LA. They were generating almost no inbound leads and losing prospects to competitors with more polished digital presence.',
+        approach: 'We rebuilt Harlow\'s website from scratch — custom HTML, zero templates. The design system elevated the brand to match the luxury properties they represent. Strategic intake forms, agent profiles, and listing integrations were built to capture and qualify leads automatically.',
+        result: 'The new site loads in under 0.8 seconds, scores 97 on Google PageSpeed, and converts at 11.2% — compared to 1.4% on the previous site. Inbound leads increased 623% in the first 90 days.',
+        quote: 'Our website used to be embarrassing to share. Now it\'s the first thing we send to every potential client.',
+        quoteAuthor: 'Jordan Harlow, Principal — Harlow Real Estate Group',
+        tags: ['Website Development', 'Real Estate', 'Conversion Optimization', 'Custom Code']
+      },
+      'social-media': {
+        eyebrow: 'Case Study — Social Media Management',
+        title: 'Building an Audience Worth Having',
+        client: 'Cleo Restaurant Group',
+        stats: [
+          { value: '44K', label: 'Followers Gained' },
+          { value: '8.4%', label: 'Engagement Rate' },
+          { value: '31%', label: 'Revenue Increase' }
+        ],
+        challenge: 'Cleo had three restaurant locations and a combined social following of 2,100 — mostly staff and family. Their content was inconsistent, unbranded, and generated almost no engagement or foot traffic.',
+        approach: 'We developed a content strategy built on three pillars: the story behind the food, the people who make it, and the experience of being there. Monthly content shoots, weekly posting cadence, and a community engagement protocol were implemented across Instagram and TikTok.',
+        result: 'In 14 months Cleo grew from 2,100 to 46,100 followers with an 8.4% average engagement rate — five times the industry benchmark. Revenue across all three locations increased 31% with 22% of new customers citing social media as their discovery channel.',
+        quote: 'I didn\'t believe social media could actually move the needle until it did. Now it\'s our most consistent source of new guests.',
+        quoteAuthor: 'Nina Cleo, Owner — Cleo Restaurant Group',
+        tags: ['Social Media', 'Content Strategy', 'Hospitality', 'Instagram']
+      },
+      'content-production': {
+        eyebrow: 'Case Study — Content Production',
+        title: 'Content That Converts',
+        client: 'Maison Skincare',
+        stats: [
+          { value: '12x', label: 'Content Output' },
+          { value: '220%', label: 'Website Traffic' },
+          { value: '$340K', label: 'Attributed Revenue' }
+        ],
+        challenge: 'Maison launched a premium skincare line with exceptional products but no content infrastructure. Their product photography was inconsistent, their video content nonexistent, and their brand story untold.',
+        approach: 'We designed and executed a full content production system — quarterly brand shoots, product photography standards, short-form video production for social, and long-form content for email and the website. Every asset was built to serve multiple channels simultaneously.',
+        result: 'Over 12 months we produced 240+ brand assets across photography, video, and campaign content. Website traffic increased 220%. $340K in revenue was directly attributed to content-driven campaigns — a 9x return on the content investment.',
+        quote: 'Every asset they produce looks like it cost ten times what it did. And it performs like it, too.',
+        quoteAuthor: 'Sophie Laurent, CMO — Maison Skincare',
+        tags: ['Content Production', 'Photography', 'Video', 'E-Commerce']
+      },
+      'crm': {
+        eyebrow: 'Case Study — CRM & Client Experience',
+        title: 'Systematizing the Client Journey',
+        client: 'Meridian Wealth Advisors',
+        stats: [
+          { value: '94%', label: 'Client Retention' },
+          { value: '3.2x', label: 'Referral Rate' },
+          { value: '67%', label: 'Admin Time Saved' }
+        ],
+        challenge: 'Meridian was managing 180 high-net-worth clients across three advisors with a patchwork of spreadsheets, email threads, and calendar reminders. Client experience was inconsistent. Referrals were being missed. Administrative overhead was consuming 40% of advisor time.',
+        approach: 'We audited the complete client lifecycle from first inquiry to annual review and mapped every touchpoint. We then designed and implemented a CRM system with automated intake, onboarding sequences, review reminders, and referral tracking — all tailored to the expectations of HNW clients.',
+        result: 'Client retention increased to 94%. Referral rate more than tripled. Advisors reclaimed 67% of their previous administrative time — redirected entirely to client relationships and new business development.',
+        quote: 'We went from managing our business in our heads to running it like a real firm. The difference is extraordinary.',
+        quoteAuthor: 'David Merritt, Managing Partner — Meridian Wealth Advisors',
+        tags: ['CRM', 'Client Experience', 'Financial Services', 'Operations']
+      },
+      'experiences': {
+        eyebrow: 'Case Study — Experiences & Events',
+        title: 'An Activation People Still Talk About',
+        client: 'Kōdo Spirits',
+        stats: [
+          { value: '1,200', label: 'Attendees' },
+          { value: '4.8M', label: 'Social Impressions' },
+          { value: '340%', label: 'Sales Spike' }
+        ],
+        challenge: 'Kōdo was launching a premium Japanese whisky in the LA market against established competitors with significantly larger budgets. They needed a launch moment that would create genuine cultural buzz without spending like a legacy brand.',
+        approach: 'We designed an invitation-only rooftop activation in Arts District LA — part tasting, part art installation, part cultural moment. The experience was architected around content capture from the ground up: every element designed to be photographed and shared. We curated the guest list, produced the event, and managed all content.',
+        result: 'The activation generated 4.8M social impressions in 72 hours. Kōdo sold out their initial LA allocation in 11 days — a 340% spike over projected sales. Three major retail accounts approached them directly as a result of the event coverage.',
+        quote: 'We spent a fraction of what our competitors spend on launches and made ten times the noise. That\'s The Hamilton Edge.',
+        quoteAuthor: 'Kenji Mori, Founder — Kōdo Spirits',
+        tags: ['Experiences', 'Events', 'Brand Activation', 'Hospitality', 'Los Angeles']
+      }
+    };
+
+    function openCaseStudy(id) {
+      const cs = caseStudies[id];
+      if (!cs) return;
+
+      const statsHTML = cs.stats.map(s => `
+        <div class="cs-stat">
+          <span class="cs-stat-value">${s.value}</span>
+          <span class="cs-stat-label">${s.label}</span>
+        </div>
+      `).join('');
+
+      const tagsHTML = cs.tags.map(t => `<span class="cs-tag">${t}</span>`).join('');
+
+      document.getElementById('cs-content').innerHTML = `
+        <div class="cs-animate">
+          <span class="cs-eyebrow">${cs.eyebrow}</span>
+        </div>
+        <div class="cs-animate">
+          <h2 class="cs-title">${cs.title}</h2>
+          <p class="cs-client">${cs.client}</p>
+          <div class="cs-hero-rule"></div>
+        </div>
+        <div class="cs-animate">
+          <div class="cs-stats">${statsHTML}</div>
+        </div>
+        <div class="cs-animate">
+          <div class="cs-section">
+            <p class="cs-section-label">The Challenge</p>
+            <p class="cs-section-body">${cs.challenge}</p>
+          </div>
+        </div>
+        <div class="cs-animate">
+          <div class="cs-section">
+            <p class="cs-section-label">Our Approach</p>
+            <p class="cs-section-body">${cs.approach}</p>
+          </div>
+        </div>
+        <div class="cs-animate">
+          <div class="cs-section">
+            <p class="cs-section-label">The Result</p>
+            <p class="cs-section-body">${cs.result}</p>
+          </div>
+        </div>
+        <div class="cs-animate">
+          <div class="cs-quote">
+            <p>"${cs.quote}"</p>
+            <cite>— ${cs.quoteAuthor}</cite>
+          </div>
+        </div>
+        <div class="cs-animate">
+          <div class="cs-tags">${tagsHTML}</div>
+          <div class="cs-cta-wrap">
+            <a href="#" class="cs-cta" onclick="closeCaseStudy(); setTimeout(openModal, 400); return false;">Start Your Project</a>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('cs-overlay').classList.add('open');
+      document.getElementById('cs-panel').scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+      setTimeout(initCsVideo, 100);
+    }
+
+    function closeCaseStudy() {
+      document.getElementById('cs-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function initCsVideo() {
+      const csv = document.querySelector('.cs-video-header video');
+      if (csv) {
+        csv.muted = true;
+        const p = csv.play();
+        if (p !== undefined) {
+          p.catch(() => {
+            document.addEventListener('click', () => csv.play(), { once: true });
+          });
+        }
+      }
+    }
+
     // Pill smooth scroll — no URL hash change
     document.querySelectorAll('.pill[data-target]').forEach(pill => {
       pill.addEventListener('click', function(e) {
@@ -1369,52 +2007,6 @@
           target.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       });
-    });
-
-    // Modal
-    function openModal() {
-      document.getElementById('intake-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      document.getElementById('intake-modal').classList.remove('open');
-      document.body.style.overflow = '';
-      // Reset form and thank you state after modal closes
-      setTimeout(() => {
-        document.getElementById('intake-form').reset();
-        document.getElementById('intake-form-wrap').style.display = 'block';
-        document.getElementById('thank-you').classList.remove('visible');
-      }, 500);
-    }
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Form submit
-    document.getElementById('intake-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const form = this;
-      const data = new FormData(form);
-      
-      try {
-        const response = await fetch('https://formspree.io/f/xqengjjw', {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-        
-        if (response.ok) {
-          document.getElementById('intake-form-wrap').style.display = 'none';
-          document.getElementById('thank-you').classList.add('visible');
-        } else {
-          alert('Something went wrong. Please email us directly at hello@thehamiltonedge.com');
-        }
-      } catch (error) {
-        alert('Something went wrong. Please email us directly at hello@thehamiltonedge.com');
-      }
     });
 
     // Footer LA Clock
@@ -1431,8 +2023,50 @@
     updateFooterClock();
     setInterval(updateFooterClock, 1000);
 
+    // Modal
+    function openModal() {
+      document.getElementById('intake-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('intake-modal').classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        document.getElementById('intake-form').reset();
+        document.getElementById('intake-form-wrap').style.display = 'block';
+        document.getElementById('thank-you').classList.remove('visible');
+      }, 500);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeCaseStudy(); closeModal(); }
+    });
+
+    // Form submit
+    document.getElementById('intake-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = this;
+      const data = new FormData(form);
+      try {
+        const response = await fetch('https://formspree.io/f/xqengjjw', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          document.getElementById('intake-form-wrap').style.display = 'none';
+          document.getElementById('thank-you').classList.add('visible');
+        } else {
+          alert('Something went wrong. Please email us directly at hello@thehamiltonedge.com');
+        }
+      } catch (error) {
+        alert('Something went wrong. Please email us directly at hello@thehamiltonedge.com');
+      }
+    });
+
     // Safari video autoplay
-    const video = document.querySelector('video');
+    const video = document.querySelector('.video-bg video');
     if (video) {
       video.muted = true;
       const p = video.play();
